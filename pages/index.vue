@@ -3,7 +3,7 @@
     <div>
       <app-logo/>
       <h1 class="title">
-        nuxt-test
+        nuxt-test {{stars}}
       </h1>
       <h2 class="subtitle">
         Nuxt.js project
@@ -19,15 +19,33 @@
           class="button--grey">GitHub</a>
       </div>
     </div>
+    <page name="hello">
+      <editable />
+    </page>
+    <!-- <editable :data="{ title: 'text', textColor: 'color' }">
+      <div slot-scope="{ title, textColor }">
+        {{ value }}
+      </div>
+    </editable> -->
   </section>
 </template>
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
+import fetch from 'isomorphic-unfetch'
+import Page from '~/components/Page.vue'
+import Editable from '~/components/Editable.vue'
 
 export default {
   components: {
-    AppLogo
+    AppLogo,
+    Page,
+    Editable
+  },
+  async asyncData({ params }) {
+    const res = await fetch('https://api.github.com/repos/zeit/next.js')
+    const json = await res.json()
+    return { stars: json.stargazers_count }
   }
 }
 </script>
@@ -42,7 +60,8 @@ export default {
 }
 
 .title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* 1 */
   display: block;
   font-weight: 300;
   font-size: 100px;

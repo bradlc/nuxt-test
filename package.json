@@ -10,10 +10,17 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "lambda:serve": "netlify-lambda serve fns",
+    "lambda:build": "netlify-lambda build fns"
   },
   "dependencies": {
-    "nuxt": "^1.0.0"
+    "dotenv": "^5.0.1",
+    "isomorphic-unfetch": "^2.0.0",
+    "mysql2": "^1.5.3",
+    "netlify-lambda": "^1.0.0-babel-7-beta",
+    "nuxt": "^1.0.0",
+    "sequelize": "^4.37.5"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
