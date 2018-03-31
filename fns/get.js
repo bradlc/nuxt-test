@@ -36,8 +36,8 @@ exports.handler = function(event, context, callback) {
   Editable.sync().then(() => {
     Editable.findOne({
       where: {
-        path: body.path,
-        name: body.name
+        path: event.queryStringParameters.path,
+        name: event.queryStringParameters.name
       }
     }).then(editable => {
       callback(null, {
